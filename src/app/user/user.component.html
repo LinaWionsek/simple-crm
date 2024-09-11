@@ -1,0 +1,28 @@
+<mat-card>
+    <table class="user-table">
+        <tr>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>E-Mail</th>
+        </tr>
+
+
+        @for (singleUser of allUsers; track $index) {
+      
+          <tr>
+            <td> {{singleUser.firstName}}</td>
+            <td>{{singleUser.lastName}}</td>
+            <td>{{singleUser.city}}</td>
+          </tr>
+    
+        
+      } 
+
+    </table>
+</mat-card>
+
+
+<button (click)="openDialog()" color="primary" class="add-user-button" matTooltip="Add user" matTooltipPosition="above" mat-fab>
+    <mat-icon>add</mat-icon>
+</button>
