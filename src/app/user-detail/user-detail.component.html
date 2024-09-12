@@ -1,1 +1,21 @@
-<p>user-detail works!</p>
+<mat-card>
+    <mat-card-content class="user-detail-heaader">
+        <img src="./assets/img/profile.png" alt="">
+        <div class="user-details">
+            <h2>  {{user.lastName}}</h2>
+            {{user.email}} <br>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="mt-32">
+    <mat-card-header>
+        <mat-card-title>Address</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        {{user.street}} <br>
+        {{user.zipCode}} {{user.city}}
+
+
+    </mat-card-content>
+</mat-card>
