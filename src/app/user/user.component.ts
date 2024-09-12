@@ -41,10 +41,10 @@ export class UserComponent {
     return onSnapshot(collection(this.firestore, 'users'), (list) => {
       this.allUsers = []; // empty the array before adding new items
       list.forEach((element) => {
-        // let receivedData = element.data();
+      
         let rawData = element.data();
         let receivedData = new User(element.data());
-        if(receivedData && rawData) {
+        if(receivedData) {
           this.allUsers.push(receivedData);
           console.log('received data', receivedData);
           console.log('raw data', rawData);

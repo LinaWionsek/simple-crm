@@ -1,22 +1,19 @@
 <mat-card>
     <table class="user-table">
+      
         <tr>
             <th>Name</th>
-            <th>Last Name</th>
-            <th>City</th>
             <th>E-Mail</th>
+            <th>City</th>
         </tr>
 
 
         @for (singleUser of allUsers; track $index) {
-      
           <tr>
-            <td> {{singleUser.firstName}}</td>
-            <td>{{singleUser.lastName}}</td>
+            <td>{{singleUser.firstName}} {{singleUser.lastName}}</td>
+            <td>{{singleUser.email}}</td>
             <td>{{singleUser.city}}</td>
           </tr>
-    
-        
       } 
 
     </table>
