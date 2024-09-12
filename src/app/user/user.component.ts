@@ -14,11 +14,12 @@ import {
 } from '@angular/fire/firestore';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from '../models/user.class';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule, RouterModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -43,13 +44,16 @@ export class UserComponent {
       list.forEach((element) => {
       
         let rawData = element.data();
-        let receivedData = new User(element.data());
+        // let receivedData = new User({ ...rawData, id: element.id });
+        let receivedData = new User(rawData, element.id);
+        console.log(element.id)
         if(receivedData) {
           this.allUsers.push(receivedData);
           console.log('received data', receivedData);
           console.log('raw data', rawData);
         }
       });
+      console.log(this.allUsers);
     });
   }
 

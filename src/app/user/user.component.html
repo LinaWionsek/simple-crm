@@ -9,11 +9,14 @@
 
 
         @for (singleUser of allUsers; track $index) {
-          <tr>
+         
+          <tr [routerLink]="['/user/' + singleUser.id]">
             <td>{{singleUser.firstName}} {{singleUser.lastName}}</td>
+            <td>{{singleUser.id}}</td>
             <td>{{singleUser.email}}</td>
             <td>{{singleUser.city}}</td>
           </tr>
+        
       } 
 
     </table>
