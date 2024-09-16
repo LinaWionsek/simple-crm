@@ -64,3 +64,17 @@ mat-toolbar {
     // background: rgba(0,0,0,0.02);
     // border-left: 1px solid rgba(0,0,0,0.04);
 }
+
+@media (max-width: 600px) {
+    .router-container {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .router-container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
