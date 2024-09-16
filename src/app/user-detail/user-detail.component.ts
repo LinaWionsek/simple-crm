@@ -64,8 +64,20 @@ export class UserDetailComponent {
     this.unsubUser();
   }
 
+  /**
+ * Opens a dialog to edit the user's address information.
+ * 
+ * This method creates and opens an instance of DialogEditAddressComponent.
+ * It passes the current user object to the dialog component. 
+ * This allows the dialog component to work with the current user's data, presumably to edit address information.
+ * 
+ * 
+ */
   editMenu(){
-    this.dialog.open(DialogEditAddressComponent);
+   const dialog = this.dialog.open(DialogEditAddressComponent);
+   dialog.componentInstance.user = this.user; 
+   // dialog.componentInstance damit wird auf die neue Komponente zugegriffen mit .user auf die user variable
+   // user in the DialogEditAddressComponent gets the information of the user in this component
   }
 
   editUserDetail(){

@@ -22,8 +22,6 @@ import { Firestore, addDoc, collection } from '@angular/fire/firestore';
     MatFormFieldModule,
     FormsModule,
     MatProgressBarModule,
-    
-    
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss'
