@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
 import { User } from '../models/user.class';
 import {
   DocumentData,
@@ -10,18 +13,23 @@ import {
   doc,
   onSnapshot,
 } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
+import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent {
   userId: string = '';
   firestore: Firestore = inject(Firestore);
+  readonly dialog = inject(MatDialog);
   user: User = new User();
+
   unsubUser;
 
   /**
@@ -56,7 +64,13 @@ export class UserDetailComponent {
     this.unsubUser();
   }
 
+  editMenu(){
+    this.dialog.open(DialogEditAddressComponent);
+  }
 
+  editUserDetail(){
+    this.dialog.open(DialogEditUserComponent)
+  }
 
   
 }
