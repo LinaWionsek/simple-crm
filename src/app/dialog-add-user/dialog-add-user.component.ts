@@ -49,7 +49,6 @@ export class DialogAddUserComponent {
       .then((docRef) => {
         console.log('Document written with ID: ', docRef?.id);
         this.loading = false;
-        // this.cdr.detectChanges();
         this.dialogRef.close();
       });
      

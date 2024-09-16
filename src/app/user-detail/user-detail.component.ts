@@ -29,6 +29,8 @@ export class UserDetailComponent {
   firestore: Firestore = inject(Firestore);
   readonly dialog = inject(MatDialog);
   user: User = new User();
+  formatDate: string = '';
+
 
   unsubUser;
 
@@ -38,6 +40,7 @@ export class UserDetailComponent {
    */
   constructor(private route: ActivatedRoute) {
     this.unsubUser = this.unsubSinlgeUser();
+ 
   }
 
   getUserId() {
@@ -56,6 +59,7 @@ export class UserDetailComponent {
       (element) => {
         console.log(element.data());
         this.user = new User(element.data());
+        this.formatDate = new Date(this.user.birthDate).toLocaleDateString();
       }
     );
   }
@@ -75,13 +79,17 @@ export class UserDetailComponent {
  */
   editMenu(){
    const dialog = this.dialog.open(DialogEditAddressComponent);
-   dialog.componentInstance.user = this.user; 
+   dialog.componentInstance.user = new User(this.user.toJSON());
+   dialog.componentInstance.userId = this.userId;
    // dialog.componentInstance damit wird auf die neue Komponente zugegriffen mit .user auf die user variable
    // user in the DialogEditAddressComponent gets the information of the user in this component
   }
 
   editUserDetail(){
-    this.dialog.open(DialogEditUserComponent)
+    const dialog =  this.dialog.open(DialogEditUserComponent);
+    dialog.componentInstance.user = new User(this.user.toJSON());
+    dialog.componentInstance.userId = this.userId;
+    console.log(this.user.toJSON())
   }
 
   
