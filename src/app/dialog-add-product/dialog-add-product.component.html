@@ -15,13 +15,13 @@
 <div>
     <mat-form-field>
         <mat-label>Price</mat-label>
-        <input [disabled]="loading" [(ngModel)]="product.price" matInput placeholder="Price">
+        <input [disabled]="loading" [(ngModel)]="product.price" matInput placeholder="Price"  type="number">
     </mat-form-field>
 </div>
     <div>
         <mat-form-field class="full-width">
             <mat-label>Year</mat-label>
-            <input [disabled]="loading" [(ngModel)]="product.year" matInput placeholder="Year">
+            <input [disabled]="loading" [(ngModel)]="product.year" matInput placeholder="Year"  type="number">
         </mat-form-field>
     </div>
 
