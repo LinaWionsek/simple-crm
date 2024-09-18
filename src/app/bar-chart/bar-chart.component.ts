@@ -57,6 +57,7 @@ export class BarChartComponent {
         this.createChart();
       }
     );
+    // this.createChart();
     return () => {
       unsubUsers();
       unsubProducts();
