@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,7 +18,8 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-  ],
+   
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

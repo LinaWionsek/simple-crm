@@ -1,0 +1,60 @@
+@if (loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+<h2 mat-dialog-title>Add Product</h2>
+<mat-dialog-content>
+    <div>
+        <mat-form-field class="mr-16">
+            <mat-label>Name</mat-label>
+            <input [disabled]="loading" [(ngModel)]="product.name" matInput placeholder="Name">
+        </mat-form-field>
+
+      
+    </div>
+<div>
+    <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input [disabled]="loading" [(ngModel)]="product.price" matInput placeholder="Price">
+    </mat-form-field>
+</div>
+    <div>
+        <mat-form-field class="full-width">
+            <mat-label>Year</mat-label>
+            <input [disabled]="loading" [(ngModel)]="product.year" matInput placeholder="Year">
+        </mat-form-field>
+    </div>
+
+    <!-- <div>
+        <mat-form-field class="full-width">
+            <mat-label>Birth Date</mat-label>
+            <input [disabled]="loading" [(ngModel)]="birthDate" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div> -->
+
+    <!-- <div>
+        <mat-form-field class="full-width">
+            <mat-label>Street + House No.</mat-label>
+            <input [disabled]="loading" [(ngModel)]="user.street" matInput placeholder="Street + House No.">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="mr-16">
+            <mat-label>Zip Code</mat-label>
+            <input [disabled]="loading" [(ngModel)]="user.zipCode" matInput placeholder="Zip Code" type="number">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>City</mat-label>
+            <input [disabled]="loading" [(ngModel)]="user.city" matInput placeholder="City">
+        </mat-form-field>
+    </div> -->
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button [disabled]="loading" mat-button  matDialogClose>Cancel</button>
+    <button [disabled]="loading" mat-button (click)="saveProduct()">Save</button>
+</mat-dialog-actions>

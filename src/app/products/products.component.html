@@ -1,0 +1,28 @@
+<mat-card>
+    <table class="product-table">
+
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Year</th>
+        </tr>
+
+
+        @for (singleProduct of allProducts; track $index) {
+
+        <tr [routerLink]="['/products/' + singleProduct.id]">
+            <td>{{singleProduct.name}}</td>
+            <td>{{singleProduct.price}}</td>
+            <td>{{singleProduct.year}}</td>
+        </tr>
+
+        }
+
+    </table>
+</mat-card>
+
+
+<button (click)="openDialog()" color="primary" class="add-product-button" matTooltip="Add product"
+    matTooltipPosition="above" mat-fab>
+    <mat-icon>add</mat-icon>
+</button>
