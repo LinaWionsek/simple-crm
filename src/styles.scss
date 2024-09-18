@@ -11,6 +11,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 
+textarea {
+    resize: none;
+}
+
 .mr-16 {
     margin-right: 16px;
 }

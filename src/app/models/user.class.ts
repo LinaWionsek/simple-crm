@@ -7,6 +7,7 @@ export class User {
   street: string;
   zipCode: number;
   city: string;
+  notes: string;
 
   /**
    * Creates a new User from an optional object representation.
@@ -25,6 +26,7 @@ export class User {
     this.street = obj ? obj.street : '';
     this.zipCode = obj ? obj.zipCode : '';
     this.city = obj ? obj.city : '';
+    this.notes = obj ? obj.notes : '';
   }
 
   /**
@@ -42,6 +44,7 @@ export class User {
       street: this.street,
       zipCode: this.zipCode,
       city: this.city,
+      notes: this.notes,
     };
   }
 }

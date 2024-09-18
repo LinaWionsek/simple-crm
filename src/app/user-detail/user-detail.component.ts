@@ -16,11 +16,13 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { DialogAddUsernoteComponent } from '../dialog-add-usernote/dialog-add-usernote.component';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule, MatFormFieldModule],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
 })
@@ -92,5 +94,10 @@ export class UserDetailComponent {
     console.log(this.user.toJSON())
   }
 
-  
+  addNotes(){
+    const dialog =  this.dialog.open(DialogAddUsernoteComponent);
+    dialog.componentInstance.user = new User(this.user.toJSON());
+    dialog.componentInstance.userId = this.userId;
+    console.log(this.user.toJSON())
+  }
 }

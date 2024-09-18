@@ -1,0 +1,19 @@
+@if (loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+    
+    <h2 mat-dialog-title>Edit Usernotes</h2>
+    <mat-dialog-content>
+    
+        <div>
+            <mat-form-field>
+                <mat-label>Notes</mat-label>
+                <textarea [disabled]="loading"  [(ngModel)]="user.notes" matInput placeholder="Usernotes"></textarea>
+            </mat-form-field>
+        </div>
+    
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button [disabled]="loading" mat-button matDialogClose>Cancel</button>
+        <button [disabled]="loading" mat-button (click)="updateUserNote()">Save</button>
+    </mat-dialog-actions>

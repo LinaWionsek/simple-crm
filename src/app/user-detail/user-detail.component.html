@@ -1,37 +1,54 @@
 <mat-card>
-    <mat-card-content class="user-detail-heaader">
-        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="pin-right-upper-corner">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #userMenu="matMenu">
-            <button mat-menu-item (click)="editUserDetail()">Edit</button>
-          </mat-menu>
-        <img src="./assets/img/profile.png" alt="">
-        <div class="user-details">
-            <h2>{{user.firstName}} {{user.lastName}}</h2>
-            {{user.email}} <br>
-            {{formatDate}}
-        </div>
-    </mat-card-content>
+  <mat-card-content class="user-detail-heaader">
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" class="pin-right-upper-corner">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="editUserDetail()">Edit</button>
+    </mat-menu>
+    <img src="./assets/img/profile.png" alt="">
+    <div class="user-details">
+      <h2>{{user.firstName}} {{user.lastName}}</h2>
+      {{user.email}} <br>
+      {{formatDate}}
+    </div>
+  </mat-card-content>
 </mat-card>
 
 <mat-card class="mt-32">
-    
-    <mat-card-header>
-       
-        <button mat-icon-button [matMenuTriggerFor]="addressMenu" class="pin-right-upper-corner">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #addressMenu="matMenu">
-            <button mat-menu-item (click)="editMenu()">Edit</button>
-          </mat-menu>
-
-
-
-        <mat-card-title>Address</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        {{user.street}} <br>
-        {{user.zipCode}} {{user.city}}
-    </mat-card-content>
+  <mat-card-header>
+    <button mat-icon-button [matMenuTriggerFor]="addressMenu" class="pin-right-upper-corner">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #addressMenu="matMenu">
+      <button mat-menu-item (click)="editMenu()">Edit</button>
+    </mat-menu>
+    <mat-card-title>Address</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{user.street}} <br>
+    {{user.zipCode}} {{user.city}}
+  </mat-card-content>
+</mat-card>
+<mat-card class="mt-32">
+  <mat-card-header>
+    <button mat-icon-button [matMenuTriggerFor]="notesMenu" class="pin-right-upper-corner">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #notesMenu="matMenu">
+      <button mat-menu-item (click)="addNotes()">Edit</button>
+    </mat-menu>
+    <mat-card-title>Notes</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  @if (!user.notes) {
+    no notes
+  } @else {
+    {{user.notes}}
+  }
+</mat-card-content>
+  <!-- <mat-form-field class="example-full-width">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+  </mat-form-field> -->
 </mat-card>
