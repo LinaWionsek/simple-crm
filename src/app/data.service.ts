@@ -10,8 +10,7 @@ import {
   onSnapshot,
 } from '@angular/fire/firestore';
 import { UserInterface } from './user.interface';
-import { MatDialogRef } from '@angular/material/dialog';
-import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +20,7 @@ export class DataService {
     this.unsubUsers = this.unsubUserList();
    }
 
-  user = new User();
+  // user = new User();
   allUsers: User[] = [];
   loading = false;
   
@@ -44,25 +43,22 @@ export class DataService {
     });
   }
 
-  async addUser(user: UserInterface) {
-    await addDoc(collection(this.firestore, 'users'), user)
-    .catch((err) => {
-      console.error(err);
-    })
-    .then((docRef: any) => {
-      console.log('Document written with ID: ', docRef?.id);
-      this.loading = false;
-      // dialogRef.close();
-      // this.dialogRef.close();
-    });
 
+async addUser(user : UserInterface) {
+  this.loading = true;
+  await addDoc(this.getUsersRef(), user)
+  .catch((err) => {
+    console.error(err);
+  })
+  .then((docRef) => {
+    console.log('Document written with ID: ', docRef?.id);
+    // this.loading = false;
+  });
+}
+
+  getUsersRef() {
+    return collection(this.firestore, 'users');
   }
-
- removeUndefined(obj: any) {
-    return JSON.parse(JSON.stringify(obj));
-  }
-
-
 
 
   ngOnDestroy() {
