@@ -8,25 +8,25 @@
     <div>
         <mat-form-field class="mr-16">
             <mat-label>First Name</mat-label>
-            <input [disabled]="loading" [(ngModel)]="data.user.firstName" matInput placeholder="First Name">
+            <input [disabled]="loading" [(ngModel)]="user.firstName" matInput placeholder="First Name">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Last Name</mat-label>
-            <input [disabled]="loading" [(ngModel)]="data.user.lastName" matInput placeholder="Last Name">
+            <input [disabled]="loading" [(ngModel)]="user.lastName" matInput placeholder="Last Name">
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field class="full-width">
             <mat-label>E-Mail</mat-label>
-            <input [disabled]="loading" [(ngModel)]="data.user.email" matInput placeholder="E-Mail">
+            <input [disabled]="loading" [(ngModel)]="user.email" matInput placeholder="E-Mail">
         </mat-form-field>
     </div>
     <div>
         <mat-form-field class="full-width">
             <mat-label>Birth Date</mat-label>
-            <input [disabled]="loading" [(ngModel)]="data.user.birthDate" matInput [matDatepicker]="picker">
+            <input [disabled]="loading" [(ngModel)]="user.birthDate" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

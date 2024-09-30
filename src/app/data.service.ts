@@ -19,14 +19,11 @@ export class DataService {
   constructor() {
     this.unsubUsers = this.unsubUserList();
   }
-  birthDate!: Date;
 
   allUsers: User[] = [];
-  loading = false;
   user = {} as UserInterface;
   unsubUsers;
-  currentUserID: string  | undefined = '';
-
+  currentUserID: string | undefined = '';
   firestore: Firestore = inject(Firestore);
 
   unsubUserList() {
@@ -34,17 +31,14 @@ export class DataService {
       this.allUsers = []; // empty the array before adding new items
       list.forEach((element) => {
         let receivedData = new User(element.data(), element.id);
-        // console.log(element.id)
         if (receivedData) {
           this.allUsers.push(receivedData);
         }
       });
-      // console.log(this.allUsers);
     });
   }
 
   async addUser(user: UserInterface) {
-    this.loading = true;
     await addDoc(this.getUsersRef(), user)
       .catch((err) => {
         console.error(err);
@@ -53,13 +47,10 @@ export class DataService {
         console.log('Document written with ID: ', docRef?.id);
         this.currentUserID = docRef?.id;
         console.log('Current User ID: ', this.currentUserID);
-      
-        // this.loading = false;
       });
   }
 
   unsubSinlgeUser(id: string) {
-    // this.getUserId();
     return onSnapshot(doc(this.getUsersRef(), id), (element) => {
       console.log(element.data());
       this.user = element.data() as UserInterface;
@@ -68,37 +59,28 @@ export class DataService {
   }
 
   handleBirthDate() {
-    // Log the current value and type of birthDate
-    console.log('BirthDate before conversion:', this.user.birthDate);
-    console.log('Type of BirthDate:', typeof this.user.birthDate);
-    // Proceed if birthDate is defined
     if (this.user.birthDate) {
-      // Attempt to create a Date object
-      const date = new Date(this.user.birthDate);
+      if (typeof this.user.birthDate === 'number') {
+        this.user.birthDate = new Date(this.user.birthDate);
+      } else if (!(this.user.birthDate instanceof Date)) {
+        this.user.birthDate = new Date(this.user.birthDate);
+      }
 
-      // Check if the date is valid
-      if (!isNaN(date.getTime())) {
-        // Valid date
-        this.user.birthDate = date;
-
-        // Format the date for display
-        this.user.formattedBirthDate = date.toLocaleDateString('en-US');
-
-        console.log(
-          'BirthDate after conversion:',
-          this.user.formattedBirthDate
-        );
+      if (!isNaN(this.user.birthDate.getTime())) {
+        this.user.formattedBirthDate =
+          this.user.birthDate.toLocaleDateString('en-US');
       } else {
-        // Invalid date
         console.error('Invalid Date:', this.user.birthDate);
-        // Handle the invalid date case as needed
-        this.user.birthDate = null; // or any default value
+        this.user.birthDate = null;
+        this.user.formattedBirthDate = '';
       }
     } else {
-      console.warn('BirthDate is undefined or null');
-      // Handle the undefined birthDate case as needed
-      this.user.birthDate = null; // or any default value
+      this.user.birthDate = null;
+      this.user.formattedBirthDate = '';
     }
+
+    console.log('Handled birthDate:', this.user.birthDate);
+    console.log('Formatted birthDate:', this.user.formattedBirthDate);
   }
 
   getUsersRef() {
@@ -107,36 +89,38 @@ export class DataService {
 
   async updateUser(docId: string) {
     this.handleBirthDate();
-    this.birthDate.getTime();
-    this.user.birthDate = this.birthDate
-      ? this.birthDate.getTime()
-      : this.user.birthDate;
-    this.loading = true;
-    await updateDoc(this.getSingleDocRef(docId), this.getCleanJson(this.user))
+
+    const updatedUser = this.getCleanJson(this.user);
+    console.log('Updating user:', updatedUser);
+    await updateDoc(this.getSingleDocRef(docId), updatedUser)
       .catch((err) => {
         console.error(err);
       })
       .then(() => {
-        this.loading = false;
-        // this.dialogRef.close();
+        console.log('User updated successfully');
       });
   }
 
   getSingleDocRef(docId: string) {
     return doc(collection(this.firestore, 'users'), docId);
   }
+
   getCleanJson(user: UserInterface) {
     return {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      birthDate: this.birthDate.getTime(),
-      street: user.street,
-      zipCode: user.zipCode,
-      city: user.city,
-      notes: user.notes,
+      firstName: user.firstName || '',
+      lastName: user.lastName || '',
+      email: user.email || '',
+      birthDate:
+        user.birthDate instanceof Date
+          ? user.birthDate.getTime()
+          : user.birthDate,
+      street: user.street || '',
+      zipCode: user.zipCode || '',
+      city: user.city || '',
+      notes: user.notes || '',
     };
   }
+
   ngOnDestroy() {
     this.unsubUsers();
   }
