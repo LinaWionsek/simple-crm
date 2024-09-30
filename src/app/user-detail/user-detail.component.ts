@@ -18,6 +18,8 @@ import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-a
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { DialogAddUsernoteComponent } from '../dialog-add-usernote/dialog-add-usernote.component';
+import { DataService } from '../data.service';
+import { UserInterface } from '../user.interface';
 
 @Component({
   selector: 'app-user-detail',
@@ -31,17 +33,16 @@ export class UserDetailComponent {
   firestore: Firestore = inject(Firestore);
   readonly dialog = inject(MatDialog);
   user: User = new User();
-  formatDate: string = '';
+  userdata = inject(DataService)
 
 
-  unsubUser;
 
   /**
    * Subscribes to route parameter changes to extract and store the user ID.
    * @param route - The activated route service.
    */
   constructor(private route: ActivatedRoute) {
-    this.unsubUser = this.unsubSinlgeUser();
+    this.getSingleUser()
  
   }
 
@@ -54,21 +55,11 @@ export class UserDetailComponent {
     });
   }
 
-  unsubSinlgeUser() {
+  getSingleUser(){
     this.getUserId();
-    return onSnapshot(
-      doc(collection(this.firestore, 'users'), this.userId),
-      (element) => {
-        console.log(element.data());
-        this.user = new User(element.data());
-        this.formatDate = new Date(this.user.birthDate).toLocaleDateString();
-      }
-    );
+    this.userdata.unsubSinlgeUser(this.userId)
   }
 
-  ngOnDestroy() {
-    this.unsubUser();
-  }
 
   /**
  * Opens a dialog to edit the user's address information.
@@ -81,7 +72,8 @@ export class UserDetailComponent {
  */
   editMenu(){
    const dialog = this.dialog.open(DialogEditAddressComponent);
-   dialog.componentInstance.user = new User(this.user.toJSON());
+
+  //  dialog.componentInstance.user = this.userdata.user;
    dialog.componentInstance.userId = this.userId;
    // dialog.componentInstance damit wird auf die neue Komponente zugegriffen mit .user auf die user variable
    // user in the DialogEditAddressComponent gets the information of the user in this component
@@ -90,14 +82,21 @@ export class UserDetailComponent {
   editUserDetail(){
     const dialog =  this.dialog.open(DialogEditUserComponent);
     dialog.componentInstance.user = new User(this.user.toJSON());
+    dialog.componentInstance.user = JSON.parse(JSON.stringify(this.user));
     dialog.componentInstance.userId = this.userId;
-    console.log(this.user.toJSON())
+    // console.log(this.user.toJSON())
   }
 
   addNotes(){
-    const dialog =  this.dialog.open(DialogAddUsernoteComponent);
-    dialog.componentInstance.user = new User(this.user.toJSON());
-    dialog.componentInstance.userId = this.userId;
-    console.log(this.user.toJSON())
+    // const dialog =  this.dialog.open(DialogAddUsernoteComponent);
+    // dialog.componentInstance.user = new User(this.user.toJSON());
+    // dialog.componentInstance.userId = this.userId;
+    // console.log(this.user.toJSON())
   }
+
+
+
+ 
+
+
 }

@@ -9,6 +9,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { User } from '../models/user.class';
 import { collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { DataService } from '../data.service';
+import { UserInterface } from '../user.interface';
 
 @Component({
   selector: 'app-dialog-edit-user',
@@ -19,31 +21,34 @@ import { collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
   styleUrl: './dialog-edit-user.component.scss'
 })
 export class DialogEditUserComponent {
-  user!: User;
+  user!: UserInterface;
   loading = false;
-  birthDate!: Date;
+  birthDate: Date = new Date();
   userId!: string;
-  firestore: Firestore = inject(Firestore);
+  data: DataService = inject(DataService);
+  
 
+ 
   constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>){
 
   
   }
-  async updateUser(){
-    this.user.birthDate = this.birthDate
-    ? this.birthDate.getTime()
-    : this.user.birthDate;
-    this.loading = true;
-    await updateDoc(this.getSingleDocRef(), this.user.toJSON())
-    .catch((err) => { console.error(err)})
-    .then(() => {
-      this.loading = false;
-      this.dialogRef.close();
-    })
+  async updateUser2(){
+    console.log(this.userId)
+    // let user: UserInterface = this.returnAsJSON()
+    // this.data.user.birthDate = this.birthDate
+    //  this.data.handleBirthDate()
+    await this.data.updateUser(this.userId)
+    // this.loading = true;
+    // await updateDoc(this.getSingleDocRef(), this.data.getCleanJson(this.user))
+    // .catch((err) => { console.error(err)})
+    // .then(() => {
+    //   this.loading = false;
+    //   this.dialogRef.close();
+    // })
+    this.dialogRef.close();
   }
+ 
 
-  getSingleDocRef() {
-    return doc(collection(this.firestore, 'users'), this.userId);
-  }
   
 }

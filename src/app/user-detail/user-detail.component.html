@@ -8,9 +8,10 @@
     </mat-menu>
     <img src="./assets/img/profile.png" alt="">
     <div class="user-details">
-      <h2>{{user.firstName}} {{user.lastName}}</h2>
-      {{user.email}} <br>
-      {{formatDate}}
+      <h2>{{userdata.user.firstName}} {{userdata.user.lastName}}</h2>
+      {{userdata.user.email}} <br>
+      {{userdata.user.birthDate}}
+
     </div>
   </mat-card-content>
 </mat-card>
@@ -26,8 +27,8 @@
     <mat-card-title>Address</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    {{user.street}} <br>
-    {{user.zipCode}} {{user.city}}
+    {{userdata.user.street}} <br>
+    {{userdata.user.zipCode}} {{userdata.user.city}}
   </mat-card-content>
 </mat-card>
 <mat-card class="mt-32">
@@ -41,10 +42,10 @@
     <mat-card-title>Notes</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-  @if (!user.notes) {
+  @if (!userdata.user.notes) {
     no notes
   } @else {
-    {{user.notes}}
+    {{userdata.user.notes}}
   }
 </mat-card-content>
   <!-- <mat-form-field class="example-full-width">

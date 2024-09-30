@@ -3,7 +3,8 @@ export interface UserInterface {
     firstName: string;
     lastName: string;
     email: string;
-    birthDate?: Date | number;
+    birthDate?: Date | number | null;
+    formattedBirthDate?: string;
     street: string;
     zipCode: string;
     city: string;

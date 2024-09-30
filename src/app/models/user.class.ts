@@ -1,11 +1,12 @@
 export class User {
-  id: string;
+  id?: string;
   firstName: string;
   lastName: string;
   email: string;
-  birthDate: number;
+  birthDate?: Date | number | null;
+  formattedBirthDate?: string;
   street: string;
-  zipCode: number;
+  zipCode: string;
   city: string;
   notes: string;
 
@@ -23,6 +24,7 @@ export class User {
     this.lastName = obj ? obj.lastName : '';
     this.email = obj ? obj.email : '';
     this.birthDate = obj ? obj.birthDate : '';
+    this.formattedBirthDate = obj ? obj.formattedBirthDate : '';
     this.street = obj ? obj.street : '';
     this.zipCode = obj ? obj.zipCode : '';
     this.city = obj ? obj.city : '';
@@ -41,6 +43,7 @@ export class User {
       lastName: this.lastName,
       email: this.email,
       birthDate: this.birthDate,
+      formattedBirthDate: this.formattedBirthDate,
       street: this.street,
       zipCode: this.zipCode,
       city: this.city,

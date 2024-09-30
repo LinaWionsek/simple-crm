@@ -30,36 +30,16 @@ export class DialogAddUserComponent {
   birthDate: Date = new Date();
   data: DataService = inject(DataService);
   loading = false;
-
-  firstName = '';
-  lastName = '';
-  email = '';
-  street = '';
-  zipCode = '';
-  city = '';
-  notes = '';
+  user = {} as UserInterface;
+ 
 
   constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {}
 
   async saveUser() {
-    let user: UserInterface = this.returnAsJSON()
     this.loading = true;
-    await this.data.addUser(user as UserInterface);
+    await this.data.addUser(this.user);
     this.loading = false;
     this.dialogRef.close();
   }
 
-  returnAsJSON() {
-    return {
-      id: '',
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      birthDate: this.birthDate.getTime(),
-      street: this.street,
-      zipCode: this.zipCode,
-      city: this.city,
-      notes: this.notes,
-    }
-  }
 }
