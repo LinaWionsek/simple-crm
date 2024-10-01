@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
-import { User } from '../models/user.class';
-import { collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { UserInterface } from '../user.interface';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-dialog-edit-address',
@@ -16,27 +16,22 @@ import { collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
   styleUrl: './dialog-edit-address.component.scss'
 })
 export class DialogEditAddressComponent {
-  user!: User;
+  user!: UserInterface;
   loading = false;
   userId!: string;
-  firestore: Firestore = inject(Firestore);
-
+  data: DataService = inject(DataService);
 
   constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>){
 
   }
+
   async updateAddress(){
     this.loading = true;
-    await updateDoc(this.getSingleDocRef(), this.user.toJSON())
-    .catch((err) => { console.error(err)})
-    .then(() => {
-      this.loading = false;
-      this.dialogRef.close();
-    })
+    this.data.user = { ...this.user };
+    await this.data.updateUser(this.userId);
+    this.loading = false;
+    this.dialogRef.close();
   }
 
-  getSingleDocRef() {
-    return doc(collection(this.firestore, 'users'), this.userId);
-  }
 
 }

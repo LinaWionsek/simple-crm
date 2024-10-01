@@ -7,8 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { User } from '../models/user.class';
-import { collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { DataService } from '../data.service';
 import { UserInterface } from '../user.interface';
 

@@ -22,7 +22,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #addressMenu="matMenu">
-      <button mat-menu-item (click)="editMenu()">Edit</button>
+      <button mat-menu-item (click)="editAddress()">Edit</button>
     </mat-menu>
     <mat-card-title>Address</mat-card-title>
   </mat-card-header>
@@ -48,8 +48,4 @@
     {{userdata.user.notes}}
   }
 </mat-card-content>
-  <!-- <mat-form-field class="example-full-width">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-  </mat-form-field> -->
 </mat-card>

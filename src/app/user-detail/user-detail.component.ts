@@ -4,14 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import {
-  DocumentData,
-  Firestore,
-  collection,
-  collectionData,
-  doc,
-  onSnapshot,
-} from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
@@ -72,10 +65,13 @@ export class UserDetailComponent {
    *
    *
    */
-  editMenu() {
+  editAddress() {
     const dialog = this.dialog.open(DialogEditAddressComponent);
     dialog.componentInstance.userId = this.userId;
-    //  dialog.componentInstance.user = this.userdata.user;
+    this.temporalUser = { ...this.userdata.user };
+    dialog.componentInstance.user = this.temporalUser;
+    console.log('temproralUser: ', this.temporalUser);
+    console.log('user: ', this.userdata.user);
     // dialog.componentInstance damit wird auf die neue Komponente zugegriffen mit .user auf die user variable
     // user in the DialogEditAddressComponent gets the information of the user in this component
   }
@@ -85,24 +81,16 @@ export class UserDetailComponent {
     dialog.componentInstance.userId = this.userId;
     this.temporalUser = { ...this.userdata.user };
     dialog.componentInstance.user = this.temporalUser;
-    console.log('temproralUser: ', this.temporalUser)
-    console.log('user: ', this.userdata.user)
-
-
-
-
-    // ------------------------------------------------------
-    // dialog.componentInstance.user = new User(this.user.toJSON());
-    // dialog.componentInstance.user = JSON.parse(JSON.stringify(this.user));
-
-    // console.log(this.user.toJSON())
+    console.log('temproralUser: ', this.temporalUser);
+    console.log('user: ', this.userdata.user);
   }
 
   addNotes() {
     const dialog = this.dialog.open(DialogAddUsernoteComponent);
     dialog.componentInstance.userId = this.userId;
-    // dialog.componentInstance.user = new User(this.user.toJSON());
-
-    // console.log(this.user.toJSON())
+    this.temporalUser = { ...this.userdata.user };
+    dialog.componentInstance.user = this.temporalUser;
+    console.log('temproralUser: ', this.temporalUser);
+    console.log('user: ', this.userdata.user);
   }
 }
