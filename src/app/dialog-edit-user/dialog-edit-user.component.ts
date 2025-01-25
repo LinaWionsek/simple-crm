@@ -39,6 +39,7 @@ export class DialogEditUserComponent {
     //Add 'implements OnInit' to the class.
     console.log('Initial user:', this.user);
   }
+  
   async updateUser2() {
     console.log('Updating user with ID:', this.userId);
     console.log('User before update:', this.user);
