@@ -1,10 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
 describe('AppComponent', () => {
+  const mockActivatedRoute = {
+    snapshot: {
+      params: {},
+      queryParams: {},
+      data: {}
+    }
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [AppComponent, NoopAnimationsModule],
+      providers: [
+        { provide: ActivatedRoute, useValue: mockActivatedRoute } // ✅ DAS HAT GEFEHLT!
+      ]
     }).compileComponents();
   });
 
@@ -24,6 +36,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, simple-crm');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Simple CRM');
   });
 });
